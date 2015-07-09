@@ -1,0 +1,34 @@
+{
+  "name": "autoprefixer-stream",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "autoprefixer as a stream",
+  "license": "MIT",
+  "repository": "eaze/autoprefixer-stream",
+  "author": {
+    "name": "Andrew Joslin",
+    "email": "andrewtjoslin@gmail.com",
+    "url": "eazeup.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "keywords": [
+    "autoprefixer stream browserify transform"
+  ],
+  "dependencies": {
+    "autoprefixer-core": "^5.2.1",
+    "postcss": "^4.1.16",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "standard": "^4.0.0",
+    "tape": "^4.0.0"
+  },
+  "files": [
+    "index.js"
+  ]
+}
