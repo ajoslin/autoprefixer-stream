@@ -1,4 +1,4 @@
-# autoprefixer-stream [![Build Status](https://travis-ci.org/eaze/autoprefixer-stream.svg?branch=master)](https://travis-ci.org/eaze/autoprefixer-stream)
+# autoprefixer-stream [![Build Status](https://travis-ci.org/ajoslin/autoprefixer-stream.svg?branch=master)](https://travis-ci.org/ajoslin/autoprefixer-stream)
 
 > autoprefixer as a stream
 
@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install --save autoprefixer-stream
+$ npm install --save-dev autoprefixer-stream
 ```
 
 
@@ -15,31 +15,21 @@ $ npm install --save autoprefixer-stream
 ```js
 var autoprefixerStream = require('autoprefixer-stream');
 
-autoprefixerStream('unicorns');
-//=> unicorns & rainbows
+fs.createReadStream('file.css')
+  .pipe(autoprefixerStream('file.css'))
+  .pipe(fs.createWriteStream('file-prefixed.css'))
 ```
 
-## API
+Or with browserify as a transform:
 
-### autoprefixerStream(input, [options])
-
-#### input
-
-*Required*  
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-##### foo
-
-Type: `boolean`  
-Default: `false`
-
-Lorem ipsum.
-
+```js
+{
+  "browserify": {
+    "transform": ["autoprefixer-stream"]
+  }
+}
+```
 
 ## License
 
-MIT © [Andrew Joslin](http://eazeup.com)
+MIT © [Andrew Joslin](http://ajoslin.com)
