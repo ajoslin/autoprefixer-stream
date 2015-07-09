@@ -1,32 +1,27 @@
 'use strict'
 
 var test = require('tape')
-var autoprefixerStream = require('./')
 var fs = require('fs')
-var through = require('through2')
+var path = require('path')
+var applyTranform = require('apply-transform')
+var prefix = require('./')
 
-test('should work with css', function (t) {
-  var contents = ''
-  fs.createReadStream(__dirname + '/test.css')
-    .pipe(autoprefixerStream('file.css'))
-    .pipe(through(function (buf, enc, next) {
-      contents += buf.toString('utf8')
-      next()
-    }, function (next) {
-      t.ok(contents.indexOf('-webkit-transform') > -1, 'should have webkit transform')
-      t.end()
-    }))
+test('css', function (t) {
+  t.plan(1)
+  var filename = 'test.css'
+  var css = fs.readFileSync(path.resolve(__dirname, filename)).toString()
+  applyTranform(prefix(filename), css, function (err, transformed) {
+    if (err) return t.end(err)
+    t.ok(transformed.indexOf('-webkit-transform'), 'has prefix')
+  })
 })
 
-test('should do nothing with js', function (t) {
-  var contents = ''
-  fs.createReadStream(__dirname + '/test.js')
-    .pipe(autoprefixerStream('file.js'))
-    .pipe(through(function (buf, enc, next) {
-      contents += buf.toString('utf8')
-      next()
-    }, function (next) {
-      t.equal(contents, fs.readFileSync(__dirname + '/test.js').toString())
-      t.end()
-    }))
+test('js', function (t) {
+  t.plan(1)
+  var filename = __filename
+  var js = fs.readFileSync(path.resolve(__dirname, filename)).toString()
+  applyTranform(prefix(filename), js, function (err, transformed) {
+    if (err) return t.end(err)
+    t.equal(transformed, js, 'js passed through')
+  })
 })

@@ -26,9 +26,9 @@
     "transformify": "~0.1.2"
   },
   "devDependencies": {
+    "apply-transform": "^0.1.4",
     "standard": "^4.0.0",
-    "tape": "^4.0.0",
-    "through2": "^2.0.0"
+    "tape": "^4.0.0"
   },
   "files": [
     "index.js"
