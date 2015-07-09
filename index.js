@@ -2,24 +2,19 @@
 
 var autoprefixer = require('autoprefixer-core')
 var postcss = require('postcss')
-var through = require('through2')
 var path = require('path')
+var PassThrough = require('readable-stream').PassThrough
+var transformify = require('transformify')
 
-module.exports = function (file, opts) {
-  var data = ''
+module.exports = function autoprefixer (file, opts) {
   if (file && path.extname(file) !== '.css') {
-    return through()
-  } else {
-    return through(write, end)
+    return new PassThrough()
   }
+  return prefixer()
+}
 
-  function write (buf, enc, next) {
-    data += buf
-    next()
-  }
-  function end (next) {
-    var result = postcss([ autoprefixer ]).process(data).css
-    this.push(new Buffer(result))
-    next()
-  }
+var prefixer = transformify(prefix)
+
+function prefix (css) {
+  return postcss([autoprefixer]).process(css).css
 }

@@ -22,11 +22,13 @@
   "dependencies": {
     "autoprefixer-core": "^5.2.1",
     "postcss": "^4.1.16",
-    "through2": "^2.0.0"
+    "readable-stream": "~2.0.1",
+    "transformify": "~0.1.2"
   },
   "devDependencies": {
     "standard": "^4.0.0",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "through2": "^2.0.0"
   },
   "files": [
     "index.js"
